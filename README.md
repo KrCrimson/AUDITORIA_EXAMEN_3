@@ -155,6 +155,17 @@ docker compose exec backend python -c "import sqlite3; conn = sqlite3.connect('t
 ```
 
 ### Anexo C: Evidencia Visual de Flujo de Tickets
-A continuación se adjunta la captura de pantalla de la conversación real simulada en el frontend, donde se ejecutan los clics y confirmaciones hasta la creación exitosa del ticket #2:
-
-![Evidencia Visual de Flujo de Tickets](evidencias/ticket_creation_visual_evidence.png)
+├── 01-docker-compose-ps.png       → Captura de "docker compose ps" mostrando los 3 contenedores "Up"
+![alt text](<Captura de pantalla 2026-06-24 162023.png>)
+├── 02-grep-llama-a-smollm.png     → Captura del diff/grep mostrando el cambio de modelo en main.py
+![alt text](<Captura de pantalla 2026-06-24 162056.png>)
+├── 03-router-fix-codigo.png       → Captura del código de clasificar_intencion() en main.py (el fix determinístico)
+![alt text](<Captura de pantalla 2026-06-24 162119-1.png>)
+├── 04-frontend-chat-cargado.png   → Captura del navegador en localhost:5173 mostrando el mensaje de bienvenida
+![alt text](<Captura de pantalla 2026-06-24 162217.png>)
+├── 05 ticket_creation_visual_evidence.png → flujo completo de creación de ticket #2
+![alt text](<Captura de pantalla 2026-06-24 162244.png>)
+├── 06-sqlite-tickets-query.png    → Captura de terminal con el SELECT * FROM tickets mostrando los 2 registros
+![alt text](<Captura de pantalla 2026-06-24 162307.png>)
+└── 07-dockerignore-contexto.png   → Captura mostrando "Sending build context" antes (990MB) y después (713 bytes)
+![alt text](<Captura de pantalla 2026-06-24 162318.png>)
