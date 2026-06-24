@@ -1,0 +1,6 @@
+# Keep AuditoriaHelpDeskIA tracked for audit
+temp_clone/
+venv/
+__pycache__/
+*.pyc
+

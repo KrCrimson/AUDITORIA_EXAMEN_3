@@ -1,0 +1,60 @@
+EVIDENCIAS DE PRUEBAS DE LA API - SISTEMA DE AUDITORÍA
+======================================================
+Fecha: 2026-06-24
+Modelo Utilizado: smollm:360m (en CPU local mediante Ollama)
+Flujo de Clasificación: Determinístico por palabras clave (en Python)
+
+------------------------------------------------------
+PRUEBA 1: Reporte de problema ("el sistema no enciende")
+------------------------------------------------------
+Comando Ejecutado:
+curl.exe -s "http://localhost:5173/api/ask?question=el%20sistema%20no%20enciende"
+
+Respuesta JSON literal:
+{"answer":"El sistema no enciende (no se encuentra en el sistema) es un sentimiento que puede ser intencionado, como en casa o en un restaurante. Esto significa que la situación de un cliente en un sitio web o en un restaurante no es una situación de cambio, pero también un sentimiento que se pueden hacer con el sistema.\n\nEn un sitio web, el sistema no enciende puedes ser intencionado por varios factores:\n\n1. La información es muy rica y buscada ahora, pero no hay ningún sentimiento que se encuentra en la base de datos.\n2. La información es muy larga y buscada con muchas preguntas, pero no hay ningun sentimiento que se encuentra en la base de datos.\n3. La información es muy rica y buscada ahora, pero no hay ningún\n\n¿Esta información soluciona tu problema?","follow_up_required":true}
+
+Tiempo "elapsed" de procesamiento del backend:
+17.945028 segundos
+
+Resultado de Clasificación:
+Exitoso. Clasificado como 'reporte_de_problema' (activó follow_up_required=True y agregó la pregunta de confirmación).
+
+------------------------------------------------------
+PRUEBA 2: Pregunta general ("como instalo una impresora")
+------------------------------------------------------
+Comando Ejecutado:
+curl.exe -s "http://localhost:5173/api/ask?question=como%20instalo%20una%20impresora"
+
+Respuesta JSON literal:
+{"answer":"Como instalo una impresora?\n\nComo instalo una impresora es un tipo de criptón que se utiliza para desarrollar programas, diseños y diseñadores. Esta criptón es muy importante en la industria digital, como tus programas son.\n\nEn el contexto de la pregunta, la criptón es un tipo de criptón que se utiliza para desarrollar programas y diseñadores. Esta criptón es muy importante en la industria digital, como tus programas son.\n\nComo instalo una impresora es un tipo de criptón que se utiliza para desarrollar programas y diseñadores. Esta criptón es muy importante en la industria digital, como tus programas son.\n\nEn el contexto de la pregunta, la criptón es un tipo de criptón que se utiliza para desarrollar programas y diseñadores. Esta criptón es muy importante en la indust","follow_up_required":false}
+
+Tiempo "elapsed" de procesamiento del backend:
+22.833552 segundos
+
+Resultado de Clasificación:
+Exitoso. Clasificado como 'pregunta_general' (invocó el RAG chain sin activar el flujo de seguimiento).
+
+------------------------------------------------------
+PRUEBA 3: Despedida ("gracias adios")
+------------------------------------------------------
+Comando Ejecutado:
+curl.exe -s "http://localhost:5173/api/ask?question=gracias%20adios"
+
+Respuesta JSON literal:
+{"answer":"De nada, ¡un placer ayudar! Si tienes cualquier otra consulta, aquí estaré. 😊","follow_up_required":false}
+
+Tiempo "elapsed" de procesamiento del backend:
+0.000000 segundos (respuesta instantánea en memoria)
+
+Resultado de Clasificación:
+Exitoso. Clasificado como 'despedida' (retornó el saludo de cierre sin pasar por el LLM ni RAG).
+
+------------------------------------------------------
+PRUEBA DE BASE DE DATOS (tickets.db)
+------------------------------------------------------
+Comando de Consulta inside Container:
+docker compose exec backend python -c "import sqlite3; conn = sqlite3.connect('tickets.db'); print(conn.cursor().execute('SELECT * FROM tickets;').fetchall())"
+
+Registros obtenidos en tickets.db:
+1. ID 1: 'El teclado no responde y tiene luces apagadas' (Status: Abierto)
+2. ID 2: 'El monitor esta parpadeando y se apaga de repente.' (Status: Abierto)
